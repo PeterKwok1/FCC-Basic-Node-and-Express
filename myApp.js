@@ -23,6 +23,7 @@ app.get("/json", (req, res) => {
     res.json({ message: response });
 });
 
+// middleware chaining 
 app.get(
     "/now",
     (req, res, next) => {
@@ -34,8 +35,15 @@ app.get(
     },
 );
 
+// route paramater
 app.get("/:word/echo", (req, res) => {
     res.json({ echo: req.params.word })
 });
+
+// query string
+app.get("/name", (req, res) => {
+    res.json({ name: `${req.query.first} ${req.query.last}` })
+})
+// note from last question. can chain different verb handles on the same path route for cleaner code: app.route(path).get(handler).post(handler)
 
 module.exports = app;
